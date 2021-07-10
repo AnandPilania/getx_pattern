@@ -1,13 +1,13 @@
 import 'package:getx_pattern/app/exceptions/server_exception.dart';
-import 'package:getx_pattern/app/http/requests/auth/forgot_password_request.dart';
-import 'package:getx_pattern/app/http/requests/auth/login_request.dart';
-import 'package:getx_pattern/app/http/requests/auth/register_request.dart';
-import 'package:getx_pattern/app/providers/api_provider.dart';
+import 'package:getx_pattern/modules/auth/http/requests/forgot_password_request.dart';
+import 'package:getx_pattern/modules/auth/http/requests/login_request.dart';
+import 'package:getx_pattern/modules/auth/http/requests/register_request.dart';
 import 'package:getx_pattern/core/helpers.dart';
 import 'package:getx_pattern/core/support/base_controller.dart';
+import 'package:getx_pattern/modules/auth/providers/auth_provider.dart';
 
 class AuthController extends BaseController {
-  ApiProvider _provider;
+  AuthProvider _provider;
   AuthController(this._provider);
 
   void login() async {
