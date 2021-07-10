@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:getx_pattern/app/http/controllers/home_controller.dart';
 import 'package:getx_pattern/app/providers/api_provider.dart';
 
 class AppBinding extends Bindings {

@@ -1,7 +1,4 @@
 import 'package:get/get.dart';
-import 'package:getx_pattern/app/bindings/auth_binding.dart';
-import 'package:getx_pattern/app/bindings/home_binding.dart';
-import 'package:getx_pattern/app/bindings/splash_binding.dart';
 import 'package:getx_pattern/app/http/middlewares/authenticated_middleware.dart';
 import 'package:getx_pattern/app/http/middlewares/guest_middleware.dart';
 import 'package:getx_pattern/core/middlewares/root_middleware.dart';
