@@ -43,7 +43,10 @@ class InitAppService extends GetxService {
   Rx<AppTheme> _theme = AppConstants.DEFAULT_THEME.obs;
   AppTheme get theme => _theme.value;
   set theme(AppTheme v) => _theme.value = v;
-  void _initTheme() {
+  void _initTheme(AppTheme? _theme) {
+    if (_theme != null) {
+      box().write(kTheme, _theme.toString());
+    }
     var sTheme = boxRead<String>(kTheme);
     if (sTheme.isNotEmpty) {
       AppTheme.values.forEach((t) {
@@ -60,33 +63,45 @@ class InitAppService extends GetxService {
   Rx<Locale> _locale = AppConstants.DEFAULT_LOCALE.obs;
   Locale get locale => _locale.value;
   set locale(Locale v) => _locale.value = v;
-  void _initLocale() {
-    var sLocale = boxRead<String>(kLocale);
-    if (sLocale.isNotEmpty) {
-      Locale decodedLocale = decodeLocale(sLocale);
-      if (decodedLocale != locale) {
-        locale = decodedLocale;
-        Get.updateLocale(locale);
+  void _initLocale(Locale? _locale) {
+    if (_locale != null) {
+      box().write(kLocale, encodeLocale(_locale));
+    } else {
+      var sLocale = boxRead<String>(kLocale);
+      if (sLocale.isNotEmpty) {
+        Locale decodedLocale = decodeLocale(sLocale);
+        if (decodedLocale != locale) {
+          locale = decodedLocale;
+          Get.updateLocale(locale);
+        }
       }
     }
   }
 
   // User/Authentication State
   static const String kUser = 'user';
-  User? user;
-  void _initUser() {
-    var sUser = boxRead<String>(kUser);
-    if (sUser.isNotEmpty) {
-      user = User.fromJson(jsonDecode(sUser));
+  Rxn<User> _user = Rxn<User>();
+  User? get user => _user.value;
+  set user(User? v) => _user.value = v;
+  void _initUser(User? user) {
+    if (user != null) {
+      box().write(kUser, jsonEncode(user.toJson()));
+    } else {
+      var sUser = boxRead<String>(kUser);
+      if (sUser.isNotEmpty) {
+        user = User.fromJson(jsonDecode(sUser));
+      }
     }
   }
 
   Future<InitAppService> init() async {
     await GetStorage.init();
 
-    _initUser();
-    _initTheme();
-    _initLocale();
+    _initTheme(null);
+    _initLocale(null);
+
+    _initUser(null);
+    ever(_user, _initUser);
 
     if (_singleton == null) {
       _singleton = this;

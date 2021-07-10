@@ -1,4 +1,6 @@
 import 'package:get/get_navigation/src/root/internacionalization.dart';
+import 'package:getx_pattern/resources/lang/en.dart';
+import 'package:getx_pattern/resources/lang/hi.dart';
 
 class AppTranslations extends Translations {
   @override
