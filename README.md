@@ -1,4 +1,17 @@
-# getx_pattern
+# getx_pattern 
+
+Branch'simple': non-modular arch,
+Branch 'modular': modular arch.
+
+Using:
+- middlewares,
+- getConnect,
+- getxController,
+- bindings,
+- getxService,
+- localization,
+- theming,
+& more...
 
 A new Flutter project.
 
